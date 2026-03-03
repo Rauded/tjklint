@@ -2,26 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { FaGithub, FaGlobe, FaSearch } from 'react-icons/fa';
 import './projects.scss';
 
-// Importing assets for project GIFs
-import investSmartGif from '../../assets/projects/InvestSmart.gif';
-import pokePCGif from '../../assets/projects/PokePC.gif';
-import privacyXPressoGif from '../../assets/projects/PrivacyXPresso.gif';
-import portfolioGif from '../../assets/projects/Portfolio.gif';
-import digitalAdrenalineGif from '../../assets/projects/DigitalAdrenaline.gif';
-import ecovestGif from '../../assets/projects/Ecovest.gif';
-import habitGif from '../../assets/projects/habit.gif';
-import mySecretaryGif from '../../assets/projects/MySecretary.gif';
-import pathfinderGif from '../../assets/projects/Pathfinder.gif';
-
 // Import projects data
-import projectsData from '../../data/projects.json'; 
+import projectsData from '../../data/projects.json';
 
 // Project interface for type safety
 interface Project {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: string | null;
   featured: boolean;
   category: 'big' | 'small';
   technologies: {
@@ -31,23 +20,13 @@ interface Project {
   };
   tags: string[];
   links: {
-    github: string;
+    github: string | null;
     demo: string | null;
   };
 }
 
 // Asset mapping for project images
-const assetMap: { [key: string]: string } = {
-  'InvestSmart.gif': investSmartGif,
-  'PokePC.gif': pokePCGif,
-  'PrivacyXPresso.gif': privacyXPressoGif,
-  'Portfolio.gif': portfolioGif,
-  'DigitalAdrenaline.gif': digitalAdrenalineGif,
-  'Ecovest.gif': ecovestGif,
-  'habit.gif': habitGif,
-  'MySecretary.gif': mySecretaryGif,
-  'Pathfinder.gif': pathfinderGif,
-};
+const assetMap: { [key: string]: string } = {};
 
 // Handle the "Coming Soon" click event
 const handleComingSoonClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
@@ -127,12 +106,12 @@ const Projects: React.FC = () => {
   };
 
   const renderProject = (project: Project, isSmall: boolean = false) => {
-    const imageSrc = assetMap[project.image] || portfolioGif;
+    const imageSrc = project.image ? assetMap[project.image] : null;
     const containerClass = isSmall ? 'small-project' : 'project-container';
 
     return (
       <div key={project.id} className={containerClass}>
-        <img src={imageSrc} alt={`${project.title} Project`} />
+        {imageSrc && <img src={imageSrc} alt={`${project.title} Project`} />}
         <div className="project-content">
           <div className="project-header">
             <h3>{project.title}</h3>
@@ -145,18 +124,24 @@ const Projects: React.FC = () => {
           <p className="project-description">{project.description}</p>
           {renderTechnologies(project.technologies, isSmall)}
           <div className="project-links">
-            <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-              <FaGithub /> See on GitHub
-            </a>
+            {project.links.github ? (
+              <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                <FaGithub /> See on GitHub
+              </a>
+            ) : (
+              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9em', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <FaGithub /> Private Repo
+              </span>
+            )}
             {project.links.demo ? (
               <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
                 <FaGlobe /> Try it Out
               </a>
             ) : (
-              <button onClick={handleComingSoonClick} style={{ 
-                background: 'none', 
-                border: 'none', 
-                color: '#9b59b6', 
+              <button onClick={handleComingSoonClick} style={{
+                background: 'none',
+                border: 'none',
+                color: '#9b59b6',
                 fontSize: '1.2em',
                 display: 'flex',
                 alignItems: 'center',
@@ -240,11 +225,8 @@ const Projects: React.FC = () => {
                       <h3>More Projects Coming Soon...</h3>
                       <p>Stay tuned for more exciting projects!</p>
                       <div className="project-links">
-                        <a href="https://github.com/tjklint" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer">
                           <FaGithub /> See on GitHub
-                        </a>
-                        <a href="https://tjklint.com" target="_blank" rel="noopener noreferrer">
-                          <FaGlobe /> Visit Website
                         </a>
                       </div>
                     </div>

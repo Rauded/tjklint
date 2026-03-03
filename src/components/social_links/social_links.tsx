@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { FaGithub, FaLinkedin, FaGlobe, FaMedium, FaDev } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const gradientShift = keyframes`
   0% {
@@ -113,11 +113,9 @@ const SocialLinks: React.FC = () => {
       </SocialDescription>
       <SocialIcons>
         {/* Social media links with icons */}
-        <a href="https://github.com/tjklint" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        <a href="https://www.linkedin.com/in/timothy-klint" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-        <a href="https://tjklint.com" target="_blank" rel="noopener noreferrer"><FaGlobe /></a>
-        <a href="https://medium.com/@tjklint" target="_blank" rel="noopener noreferrer"><FaMedium /></a>
-        <a href="https://dev.to/tjklint" target="_blank" rel="noopener noreferrer"><FaDev /></a>
+        <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+        <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+        <a href="mailto:eduardd.hv@gmail.com"><FaEnvelope /></a>
       </SocialIcons>
     </SocialContainer>
   );

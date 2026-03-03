@@ -25,7 +25,7 @@ const ContributionMap: React.FC = () => {
           <h3 className="year-label">/2025</h3>
           <div className="calendar-wrapper">
             <GitHubCalendar
-              username="tjklint"
+              username="Rauded"
               blockSize={18}
               fontSize={16}
               theme={theme}
@@ -39,7 +39,7 @@ const ContributionMap: React.FC = () => {
           <h3 className="year-label">/2024</h3>
           <div className="calendar-wrapper">
             <GitHubCalendar
-              username="tjklint"
+              username="Rauded"
               blockSize={18}
               fontSize={16}
               theme={theme}

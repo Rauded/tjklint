@@ -1,6 +1,7 @@
 export interface ResumeEntry {
     title: string;
     company: string;
+    website?: string;
     dates: string;
     bulletPoints?: string[];
 }

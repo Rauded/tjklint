@@ -2,6 +2,7 @@ import { ResumeData } from './resumetypes';
 import resumeData from '../../data/resume.json';
 import './resume.scss';
 import VisualAid from './visualaid';
+import cvPdf from '../../assets/resume/EduardHvizdakCV.pdf';
 
 const Resume: React.FC = () => {
   const data: ResumeData = resumeData;
@@ -25,9 +26,8 @@ const Resume: React.FC = () => {
         </div>
         <div className="right-column">
           <iframe
-            title="TJ Klint Resume"
-            src="https://drive.google.com/file/d/1lu80YAIwnfPQ4X3biBm__4uldH7Pw7cV/preview"
-            allow="autoplay"
+            title="Eduard Hvižďák Resume"
+            src={cvPdf}
           ></iframe>
         </div>
       </div>

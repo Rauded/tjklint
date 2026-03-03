@@ -17,7 +17,7 @@ const Header: React.FC = () => {
   return (
     <header className="header-container">
       <a href="#home" className="logo" onClick={(e) => handleClick(e, 'home')}>
-        TJ KLINT
+        Eduard Hvizdak
       </a>
       <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         </a>
         <a
           className="button"
-          href="https://github.com/tjklint/tjklint.github.io"
+          href="https://github.com/Rauded"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setIsOpen(false)}

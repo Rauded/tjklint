@@ -251,24 +251,6 @@ const TalkLink = styled.a`
   }
 `;
 
-// Styling for the talk description text
-const TalkDescription = styled.a`
-  display: block;
-  margin-top: 0.75em;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: clamp(0.85em, 1.5vw, 1em);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1.5;
-  align-self: flex-start;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: rgba(255, 255, 255, 0.9);
-  }
-`;
-
 // Interface for circle properties
 interface CircleProps {
   id: number; /* Unique ID for each circle */
@@ -289,29 +271,28 @@ interface Talk {
 // Constants for hero component
 const topLines = [
   "You're finally awake. Let's explore my work.",
-  "In a galaxy far, far away, I created this portfolio.",
-  "Winter is coming, but you're safe here. Explore my work.",
+  "Ahoj! Vitaj na mojom portfóliu.",
+  "Čau! Rád tě tady vidím.",
   "Welcome to my corner of the web!",
-  "Greetings! I'm thrilled to have you here.",
-  "Hi! Thanks for dropping by.",
+  "Hey! Thanks for dropping by.",
+  "Hallo! Schön, dass du da bist.",
   "It's dangerous to go alone! Take this portfolio.",
   "Say hello to my little projects!",
-  "Welcome to the dark side of my portfolio.",
-  "One portfolio to rule them all.",
+  "Welcome to the dark side of AI.",
+  "One RAG pipeline to rule them all.",
 ]; // Array of possible headline texts
 
 const typewriterTexts = [
-  "Software Developer @ Botpress",
-  "Ex-SDE Intern @ Bell",
-  "Co-Chair @ CUSEC 2025",
-  "Ex-SDE Intern @ CSE",
-  "Ethical Hacker",
-  "AI Enthusiast",
-  "Founder @ JACHacks",
+  "AI Developer @ OneBond",
+  "AI Developer @ CZS / Masaryk University",
+  "AI Developer @ iGalileo",
+  "Think Tank @ EDUC Alliance",
+  "CS Student @ Masaryk University",
+  "Python & LangChain Developer",
+  "Building AI agents & RAG pipelines",
   "Coffee Drinker",
   "Hackathon Fanatic",
-  "Director of Events @ CUSEC 2024",
-  "USE BOTPRESS.COM"
+  "Multilingvální nadšenec"
 ]; // Array of texts for the typewriter effect
 
 // Main Hero component
@@ -440,7 +421,7 @@ const Hero: React.FC = () => {
     <HeroContainer>
       <LeftContainer>
         <Headline>{topLine}</Headline>
-        <GradientText>I'm TJ Klint.</GradientText>
+        <GradientText>I'm Eduard Hvižďák.</GradientText>
         <TypewriterText>{currentText}</TypewriterText>
         {isFuture && talk ? (
           <TalkLink
@@ -452,18 +433,11 @@ const Hero: React.FC = () => {
           </TalkLink>
         ) : (
           <TalkLink
-            href="mailto:timothyjklint@gmail.com?subject=Speaking Opportunity"
+            href="mailto:eduardd.hv@gmail.com?subject=Speaking Opportunity"
           >
             Next talk: <span className="event-name">Your event?</span>
           </TalkLink>
         )}
-        <TalkDescription
-          href="/data/slides/mythsandinsights.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Check out: The Myths & Insights of your (early) tech career
-        </TalkDescription>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
         <Spaceship src={spaceship} alt="Spaceship" />

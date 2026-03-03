@@ -1,21 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./about.scss";
 
-import tjklint2 from "../../assets/me/webp/tjklint2.webp";
-import tjklint3 from "../../assets/me/webp/tjklint3.webp";
-import tjklint4 from "../../assets/me/webp/tjklint4.webp";
-import tjklint5 from "../../assets/me/webp/tjklint5.webp";
-import tjklint6 from "../../assets/me/webp/tjklint6.webp";
-
-const photos = [tjklint2, tjklint3, tjklint4, tjklint5, tjklint6];
-
 const About: React.FC = () => {
-  const [photo, setPhoto] = useState("");
-
-  useEffect(() => {
-    const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
-    setPhoto(randomPhoto);
-  }, []);
 
   return (
     <div className="about-container" id="about">
@@ -23,110 +9,55 @@ const About: React.FC = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p>
-            Hello! My name is <span className="purple-text">TJ Klint</span>,
-            well, technically it's <i>Timothy</i> (our little secret). Anyways,
-            I'm a passionate developer with a love for coding and technology.
-            Most recently, I'm working as a{" "}
+            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>.
+            I’m an AI developer from Slovakia, currently based in Brno, Czechia,
+            where I’m studying{" "}
+            <span className="purple-text">Computer Science at Masaryk University</span>.
+          </p>
+          <p>
+            I work as an{" "}
+            <span className="purple-text">AI Developer at OneBond</span>, building
+            full backend architectures and AI systems for platforms like FairCity
+            (government contract analysis) and EmaAI (business intelligence).
+            In parallel, I develop AI solutions for{" "}
+            <span className="purple-text">CZS / Masaryk University</span> — most
+            notably a multi-stage RAG chatbot helping students with Erasmus
+            exchange questions.
+          </p>
+          <p>
+            My focus is on{" "}
             <span className="purple-text">
-              Full-Stack Developer at{" "}
-              <a
-                href="https://botpress.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Botpress
-              </a>
+              LangChain, RAG pipelines, multi-agent orchestration, and FastAPI backends
             </span>
-            , and previously I completed internships at{" "}
-            <span className="purple-text">
-              <a
-                href="https://www.cse-cst.gc.ca/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CSE (Communications Security Establishment)
-              </a>
-            </span>{" "}
-            and{" "}
-            <span className="purple-text">
-              <a
-                href="https://www.bell.ca/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Bell
-              </a>
-            </span>
-            .
+            . I believe in choosing the right tool for the job and thrive in
+            environments where I can move fast, learn on the fly, and ship solutions
+            that make a real impact.
           </p>
           <p>
-            My interests change greatly depending on my environment, but at the
-            moment, I am most interested by
-            <span className="purple-text">
-              {" "}
-              AI/ML, Ethical Hacking, and DevOps.
-            </span>
+            Beyond my main roles, I’ve worked as an AI Developer at{" "}
+            <span className="purple-text">iGalileo</span> (municipal chatbots and
+            form-filling agents) and as a Think Tank Member &amp; Programmer at the{" "}
+            <span className="purple-text">EDUC Alliance</span>, leading a team
+            building a digital campus platform for over 200,000 students across
+            10 European universities.
           </p>
           <p>
-            My skillset spans a wide range of technologies, and I believe in choosing the right tool for the job rather than being tied to specific frameworks or languages. I thrive in fast-paced environments where I can quickly adapt, learn on the fly, and deliver results. Whether it's building new features or{" "}
-            <span className="purple-text">crushing tech debt</span>, I'm always focused on shipping quality solutions that make a real impact.
+            Outside of tech, you’ll typically find me reading, travelling,
+            exploring new places, and occasionally pretending I understand German.
           </p>
           <p>
-            My love for tech goes beyond work. I’m always eager to dive into
-            the world of hackathons and tech conferences. My passion has led me
-            to join my favorite conference,{" "}
-            <span className="purple-text">
-              <a
-                href="https://2025.cusec.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "inherit", textDecoration: "underline" }}
-              >
-                CUSEC
-              </a>
-            </span>
-            , as the{" "}
-            <span className="purple-text">Director of Events in 2024</span>.
-            This past year, I'm thrilled to be stepping up as{" "}
-            <span className="purple-text">Co-Chair for 2025</span>.
-          </p>
-          <p>
-            Outside of tech, you'll typically find me playing hockey, golfing,
-            listening/discovering some live music, using the oxford comma, and
-            travelling!
-          </p>
-          <p>
-            You can also catch my blogs over on{" "}
+            If you want to keep up with my work, connect with me on{" "}
             <a
-              href="https://medium.com/@tjklint"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none" }}
-            >
-              Medium
-            </a>{" "}
-            or{" "}
-            <a
-              href="https://dev.to/tjklint"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none" }}
-            >
-              Dev.to
-            </a>
-            , and if you want to keep up to date with my work you should
-            definitely connect with me over on{" "}
-            <a
-              href="https://linkedin.com/in/timothy-klint"
+              href="https://www.linkedin.com/in/eduard-hvizdak"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
               LinkedIn
             </a>{" "}
-            and{" "}
+            or check out my projects on{" "}
             <a
-              href="https://github.com/tjklint"
+              href="https://github.com/Rauded"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
@@ -137,7 +68,9 @@ const About: React.FC = () => {
           </p>
         </div>
         <div className="about-photo">
-          <img src={photo} alt="TJ Klint" />
+          <div className="photo-placeholder">
+            <span>Photo coming soon</span>
+          </div>
         </div>
       </section>
     </div>
