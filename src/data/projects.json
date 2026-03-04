@@ -68,9 +68,8 @@
       },
       "blogContent": "Newsmatics Globe was built during a hackathon organized by Newsmatics. The challenge was to create something innovative with news article data.\n\nI built a full geolocation pipeline that takes raw news articles, extracts location references using AI (LangChain), geocodes them, and then visualizes every article as a point on an interactive 3D globe.\n\nThe pipeline processes articles through an LLM-based geoparser that identifies cities, countries, and specific locations mentioned in the text. These are then mapped to coordinates and rendered on a Globe.gl visualization where users can spin the globe, zoom in on hotspots, and click on individual articles.\n\nThe result is a stunning visual representation of where global news is happening in real time — you can literally see news clusters forming around conflict zones, political events, and natural disasters.\n\nThe project demonstrates the power of combining NLP with geographic visualization, turning unstructured text data into spatial insights.",
       "screenshots": [
-        "newsmatics-globe-1.png",
-        "newsmatics-globe-2.png",
-        "newsmatics-hackathon.mp4"
+        "newsmatics-hackathon.mp4",
+        "newsmatics-globe-1.png"
       ],
       "externalLinks": [
         {
