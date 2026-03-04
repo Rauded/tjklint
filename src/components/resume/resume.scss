@@ -1,15 +1,3 @@
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .resume-container {
   display: flex;
   flex-direction: column;
@@ -26,63 +14,53 @@
     margin: 0 0 30px 0;
     padding: 0;
     width: 100%;
-    background: linear-gradient(135deg, #a855f7 0%, #d4a1ff 50%, #f0abfc 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #c7d2fe;
     font-weight: 700;
     letter-spacing: -0.02em;
-    animation: gradientShift 8s ease infinite;
-    filter: drop-shadow(0 4px 12px rgba(138, 43, 226, 0.3));
   }
 
   .content-wrapper {
-    width: 100%; /* Full width for content wrapper */
+    width: 100%;
     display: flex;
-    flex-direction: column; /* Stack items vertically by default */
-    gap: 20px; /* Gap between columns on mobile */
+    flex-direction: column;
+    gap: 20px;
 
     @media (min-width: 1025px) {
-      flex-direction: row; /* Switch to a row layout on larger screens */
-      justify-content: center; /* Center content horizontally */
-      gap: 60px; /* Increased gap between text and iframe */
+      flex-direction: row;
+      justify-content: center;
+      gap: 60px;
     }
   }
 }
 
 .left-column {
-  flex: 1; /* Allow the left column to take up equal space */
-  margin-bottom: 20px; /* Space below the left column */
+  flex: 1;
+  margin-bottom: 20px;
 
   @media (min-width: 1025px) {
-    margin-right: 0; /* Remove margin, gap handles spacing */
+    margin-right: 0;
   }
 
   @media (max-width: 1024px) {
-    margin-right: 0; /* Remove right margin on smaller screens */
-    width: 100%; /* Full width on smaller screens */
+    margin-right: 0;
+    width: 100%;
   }
 }
 
 .right-column {
-  flex: 1; /* Allow the right column to take up equal space */
+  flex: 1;
   display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  width: 100%; /* Full width for the right column */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 
   iframe {
     width: 100%;
     height: 115vh;
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
-    transition: box-shadow 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 12px 32px rgba(138, 43, 226, 0.3);
-    }
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.07);
 
     @media (max-width: 1200px) {
       height: 60vh;
@@ -91,85 +69,83 @@
 }
 
 .section-container {
-  position: relative; /* Position relative for the section */
+  position: relative;
 }
 
 .section-title {
   font-size: clamp(1.8em, 4vw, 2.5em);
   margin-bottom: 24px;
   position: relative;
-  background: linear-gradient(135deg, #a855f7 0%, #d4a1ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #c7d2fe;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .line-container {
-  position: relative; /* Relative positioning for the line indicator */
+  position: relative;
 
   &:before {
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, #a855f7 0%, #d4a1ff 100%);
-    box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
+    width: 1px;
+    background: linear-gradient(180deg, #6366f1 0%, rgba(99, 102, 241, 0.1) 100%);
   }
 }
 
 .job-container {
-  margin-bottom: 20px; /* Space below each job section */
-  padding-left: 40px; /* Space on the left to align content */
-  position: relative; /* Relative positioning for the job container */
+  margin-bottom: 20px;
+  padding-left: 40px;
+  position: relative;
 
   &:before {
     content: "";
     position: absolute;
     top: 1em;
     left: 0;
-    width: 20px;
-    height: 2px;
-    background: linear-gradient(90deg, #a855f7 0%, #d4a1ff 100%);
-    box-shadow: 0 0 4px rgba(138, 43, 226, 0.5);
+    width: 18px;
+    height: 1px;
+    background: #6366f1;
   }
 }
 
 .job-title {
-  font-size: 1.5em; /* Font size for job titles */
-  margin: 10px 0; /* Space above and below the job title */
-  position: relative; /* Relative positioning for future positioning */
+  font-size: 1.4em;
+  margin: 10px 0;
+  position: relative;
+  color: #f8fafc;
+  font-weight: 600;
 }
 
 .company {
-  background: linear-gradient(135deg, #a855f7 0%, #d4a1ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a5b4fc;
   font-weight: 600;
 }
 
 .job-dates {
-  font-size: 1em; /* Font size for job dates */
-  color: #d3d3d3; /* Light gray color for job dates */
-  margin: 5px 0 10px 0; /* Spacing around job dates */
+  font-size: 0.9em;
+  color: rgba(248, 250, 252, 0.4);
+  margin: 4px 0 10px 0;
+  letter-spacing: 0.02em;
 }
 
 .bullet-point {
-  list-style-type: none; /* Remove default list style */
-  position: relative; /* Relative positioning for bullet points */
-  padding-left: 20px; /* Space on the left for the bullet points */
-  font-size: 1em; /* Font size for the bullet points */
+  list-style-type: none;
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.95em;
+  color: rgba(248, 250, 252, 0.65);
+  line-height: 1.65;
+  margin-bottom: 4px;
 
   &:before {
-    content: ">";
+    content: "›";
     position: absolute;
     left: 0;
-    background: linear-gradient(135deg, #a855f7 0%, #d4a1ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #6366f1;
     font-weight: 700;
+    font-size: 1.1em;
+    line-height: 1.5;
   }
 }

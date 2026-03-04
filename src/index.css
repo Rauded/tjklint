@@ -102,8 +102,7 @@ html, body {
   font-family: 'RobotoMono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
-  background-size: 200% 200%;
+  background-color: #09090b;
   overflow-x: hidden;
 }
 

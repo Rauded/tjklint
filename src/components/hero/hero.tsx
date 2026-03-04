@@ -20,9 +20,7 @@ const HeroContainer = styled.section`
   flex-direction: column; /* Stack items vertically by default */
   min-height: 100vh; /* Full viewport height */
   padding-top: 100px; /* Account for floating header with margin */
-  background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
-  background-size: 200% 200%;
-  animation: ${gradientShift} 15s ease infinite;
+  background-color: #09090b;
   color: #fff; /* White text */
   overflow: hidden; /* Prevent overflow */
   font-family: 'RobotoMono', sans-serif; /* Use RobotoMono font */
@@ -39,8 +37,7 @@ const HeroContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212, 161, 255, 0.1) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 20% 60%, rgba(99, 102, 241, 0.07) 0%, transparent 55%);
     pointer-events: none;
   }
 
@@ -120,7 +117,7 @@ const Spaceship = styled.img`
   width: 80%; /* Set spaceship width to 80% of the container */
   z-index: 1; /* Ensure it stays above any background elements */
   animation: ${floatAnimation} 4s ease-in-out infinite; /* Apply floating animation */
-  filter: drop-shadow(0 20px 40px rgba(138, 43, 226, 0.3));
+  filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.2));
   transition: transform 0.3s ease;
 
   @media (min-width: 768px) {
@@ -143,7 +140,7 @@ const shrinkAndMove = (left: number, top: number, containerWidth: number, contai
 // Circle styling with animation based on position and size
 const Circle = styled.div<{ left: number; top: number; size: number; containerWidth: number; containerHeight: number }>`
   position: absolute;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(212, 161, 255, 0.6) 100%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(165, 180, 252, 0.5) 100%);
   border-radius: 50%;
   backdrop-filter: blur(2px);
 
@@ -153,24 +150,18 @@ const Circle = styled.div<{ left: number; top: number; size: number; containerWi
     left: ${left}px;
     top: ${top}px;
     animation: ${shrinkAndMove(left, top, containerWidth, containerHeight)} 2s ease-out forwards;
-    box-shadow: 0 0 ${size / 2}px rgba(212, 161, 255, 0.5);
+    box-shadow: 0 0 ${size / 2}px rgba(99, 102, 241, 0.4);
   `}
 `;
 
 // Styling for the gradient text (title)
 const GradientText = styled.h2`
-  background: linear-gradient(135deg, #a855f7 0%, #d4a1ff 50%, #f0abfc 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #f8fafc;
   font-size: clamp(2.5em, 8vw, 5em);
   font-weight: 700;
   margin: 0.3em 0;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  animation: ${gradientShift} 8s ease infinite;
-  filter: drop-shadow(0 4px 12px rgba(138, 43, 226, 0.3));
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 
   @media (min-width: 768px) {
     font-size: clamp(3.5em, 6vw, 5.5em);
@@ -189,18 +180,18 @@ const blink = keyframes`
 
 // Styling for the typewriter effect text
 const TypewriterText = styled.div`
-  color: #d4a1ff;
+  color: #a5b4fc;
   font-size: clamp(1.1em, 3vw, 1.75em);
   margin-top: 1em;
   white-space: nowrap;
   overflow: hidden;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  
+  font-weight: 400;
+  letter-spacing: 0.01em;
+
   &::after {
     content: '_';
     animation: ${blink} 1s infinite;
-    color: #a855f7;
+    color: #6366f1;
     font-weight: 300;
   }
 `;

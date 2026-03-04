@@ -1,11 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { FaGithub, FaGlobe, FaSearch } from 'react-icons/fa';
 import './projects.scss';
+// @ts-ignore
+import ProjectModal from './ProjectModal.tsx';
 
 // Import projects data
 import projectsData from '../../data/projects.json';
 
 // Project interface for type safety
+interface ExternalLink {
+  label: string;
+  url: string;
+  icon: string;
+}
+
 interface Project {
   id: string;
   title: string;
@@ -23,6 +31,9 @@ interface Project {
     github: string | null;
     demo: string | null;
   };
+  blogContent: string;
+  screenshots: string[];
+  externalLinks: ExternalLink[];
 }
 
 // Asset mapping for project images
@@ -38,6 +49,7 @@ const Projects: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Get all unique tags from projects
   const allTags = useMemo(() => {
@@ -86,6 +98,14 @@ const Projects: React.FC = () => {
   const bigProjects = filteredProjects.filter(project => project.category === 'big');
   const smallProjects = filteredProjects.filter(project => project.category === 'small');
 
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+  };
+
   const renderTechnologies = (technologies: Project['technologies'], isSmall: boolean = false) => {
     const allTech = [
       ...technologies.languages,
@@ -110,7 +130,14 @@ const Projects: React.FC = () => {
     const containerClass = isSmall ? 'small-project' : 'project-container';
 
     return (
-      <div key={project.id} className={containerClass}>
+      <div
+        key={project.id}
+        className={containerClass}
+        onClick={() => handleProjectClick(project)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter') handleProjectClick(project); }}
+      >
         {imageSrc && <img src={imageSrc} alt={`${project.title} Project`} />}
         <div className="project-content">
           <div className="project-header">
@@ -125,7 +152,7 @@ const Projects: React.FC = () => {
           {renderTechnologies(project.technologies, isSmall)}
           <div className="project-links">
             {project.links.github ? (
-              <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+              <a href={project.links.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                 <FaGithub /> See on GitHub
               </a>
             ) : (
@@ -134,11 +161,11 @@ const Projects: React.FC = () => {
               </span>
             )}
             {project.links.demo ? (
-              <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
+              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                 <FaGlobe /> Try it Out
               </a>
             ) : (
-              <button onClick={handleComingSoonClick} style={{
+              <button onClick={(e) => { e.stopPropagation(); handleComingSoonClick(e); }} style={{
                 background: 'none',
                 border: 'none',
                 color: '#9b59b6',
@@ -162,7 +189,7 @@ const Projects: React.FC = () => {
   return (
     <div className="projects-container" id="projects">
       <h2 className="section-title">Projects</h2>
-      
+
       <div className="projects-controls">
         <div className="search-section">
           <div className="search-bar">
@@ -174,14 +201,14 @@ const Projects: React.FC = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button 
+          <button
             className={`show-all-button ${showAll ? 'active' : ''}`}
             onClick={() => setShowAll(!showAll)}
           >
             {showAll ? 'Show Featured' : 'Show All Projects'}
           </button>
         </div>
-        
+
         <div className="filter-tags">
           <button
             className={`tag-filter ${!selectedTag ? 'active' : ''}`}
@@ -217,7 +244,7 @@ const Projects: React.FC = () => {
             {smallProjects.length > 0 && (
               <div className="small-projects-container">
                 {smallProjects.map(project => renderProject(project, true))}
-                
+
                 {/* Coming Soon project - only show if not filtering and showing all or fewer than 6 projects */}
                 {!searchTerm && !selectedTag && (smallProjects.length < 4 || showAll) && (
                   <div className="coming-soon-project">
@@ -237,6 +264,9 @@ const Projects: React.FC = () => {
           </>
         )}
       </div>
+
+      {/* Project Detail Modal */}
+      <ProjectModal project={selectedProject} onClose={handleCloseModal} />
     </div>
   );
 };
