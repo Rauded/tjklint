@@ -145,6 +145,7 @@
       },
       "blogContent": "PsycheTab is a Chrome extension I built to turn every new tab into something personal and inspiring. Instead of the default blank page or a search engine, you see a beautiful collage you created yourself.\n\nThe extension features a full collage builder where you can upload images to your local library, then drag them onto a canvas. Each image can be moved, resized from corners, rotated using a top handle, and reordered in the layer stack with right-click controls.\n\nOnce you've built a layout you love, you save it as a background. PsycheTab supports multiple saved backgrounds with customizable rotation frequency — you can set it to rotate every new tab, every 15 minutes, every hour, or every day.\n\nI personally use it to display motivational quotes, screenshots of tweets that inspire me, and aesthetic images that set the tone for my work sessions. It turns the most-opened page in your browser into a personal vision board.\n\nThe extension is built with Manifest V3, uses vanilla HTML/CSS/JS for maximum performance, and stores everything locally in your browser using LocalForage (IndexedDB). No data ever leaves your machine — it's completely privacy-first.\n\nFeatures include an image library with drag-and-drop upload, individual image deletion, a Clear Canvas button, collage renaming, auto-arrange functionality, and a floating Ko-fi support button.",
       "screenshots": [
+        "psychetab-demo.mov",
         "psychetab-main.png",
         "psychetab-editor.png",
         "psychetab-popup.png",
