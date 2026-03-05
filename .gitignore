@@ -21,5 +21,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-*.png
-*.gif
+# src/assets and public assets should NOT be ignored
+!/public/*.gif
+!/public/*.png
+!/src/assets/**/*
