@@ -87,56 +87,44 @@ const RightContainer = styled.div`
 `;
 
 // First half: roam forward (scaleY 1), second half: roam back flipped (scaleY -1)
-const roamAnimation = keyframes`
-  0% {
-    transform: translate(0px, 0px);
-  }
-  15% {
-    transform: translate(25px, -35px);
-  }
-  30% {
-    transform: translate(-10px, -25px);
-  }
-  45% {
-    transform: translate(-30px, 15px);
-  }
-  /* removed automatic flipping at 50% */
-  50% {
-    transform: translate(-30px, 15px);
-  }
-  65% {
-    transform: translate(10px, 30px);
-  }
-  80% {
-    transform: translate(30px, -10px);
-  }
-  95% {
-    transform: translate(5px, -5px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
+// TARS patrols back and forth on a flat plane.
+const patrolAnimation = keyframes`
+  /* 1. Start on the far right, facing left */
+  0% { transform: translateX(35%) scaleX(-1); }
+  5% { transform: translateX(35%) scaleX(-1); } /* Brief pause */
+
+  /* 2. Walk strictly horizontally to the left */
+  45% { transform: translateX(-35%) scaleX(-1); }
+  50% { transform: translateX(-35%) scaleX(-1); } /* Pause at the left edge */
+
+  /* 3. Pivot instantly to face right */
+  50.1% { transform: translateX(-35%) scaleX(1); }
+  55% { transform: translateX(-35%) scaleX(1); } /* Brief pause after turning */
+
+  /* 4. Walk back to the right */
+  95% { transform: translateX(35%) scaleX(1); }
+  100% { transform: translateX(35%) scaleX(-1); } /* Pivot to loop back to 0% */
 `;
 
-const SpaceshipContainer = styled.div<{ isMirrored: boolean }>`
+const TarsContainer = styled.div`
   width: 95%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* Ground TARS to the bottom of his container */
   z-index: 1;
-  transition: transform 0.6s ease-in-out;
-  transform: scaleX(${props => props.isMirrored ? -1 : 1});
 
   @media (min-width: 768px) {
     width: 65%;
   }
 `;
 
-// Styling for the spaceship image with roaming animation (static green theme)
-const Spaceship = styled.img`
+const TarsRender = styled.img<{ hueRotate: number }>`
   width: 100%;
-  animation: ${roamAnimation} 8s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
+  /* linear easing is CRITICAL. Ease-in-out makes walking animations look like they are sliding */
+  animation: ${patrolAnimation} 24s linear infinite; 
+  filter: drop-shadow(0 20px 40px hsla(${props => (props.hueRotate + 120) % 360}, 70%, 50%, 0.3)) 
+          hue-rotate(${props => props.hueRotate}deg);
+  transition: filter 1s ease-in-out;
 `;
 
 // Animation for shrinking and moving circles
@@ -251,7 +239,7 @@ const Hero: React.FC = () => {
   const [circles, setCircles] = useState<CircleProps[]>([]); // State to manage circles
   const [topLine, setTopLine] = useState(''); // State for random headline
   const [currentText, setCurrentText] = useState(''); // State for typewriter text
-  const [isMirrored, setIsMirrored] = useState(false); // State for manual mirroring
+  const [hueRotate, setHueRotate] = useState(0); // State for simulated GIF color (0-360)
   const rightContainerRef = useRef<HTMLDivElement>(null); // Ref to get the right container's dimensions
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -343,15 +331,18 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Occasionally mirror the spaceship horizontally
-    const mirrorInterval = setInterval(() => {
-      // 15% chance to toggle mirroring every 8 seconds
-      if (Math.random() < 0.15) {
-        setIsMirrored(prev => !prev);
-      }
-    }, 8000);
+    // Only handle color transitions here now. 
+    // Mirroring is strictly handled by the CSS patrolAnimation.
+    const transitionInterval = setInterval(() => {
+      const allowedHues = [0, 60, 120, 180, 240];
+      setHueRotate(prev => {
+        const currentIndex = allowedHues.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % allowedHues.length;
+        return allowedHues[nextIndex];
+      });
+    }, 6000);
 
-    return () => clearInterval(mirrorInterval);
+    return () => clearInterval(transitionInterval);
   }, []);
 
   return (
@@ -362,12 +353,13 @@ const Hero: React.FC = () => {
         <TypewriterText>{currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
-        <SpaceshipContainer isMirrored={isMirrored}>
-          <Spaceship
+        <TarsContainer>
+          <TarsRender
             src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`}
-            alt="ASCII art"
+            alt="TARS walking ASCII art"
+            hueRotate={hueRotate}
           />
-        </SpaceshipContainer>
+        </TarsContainer>
         {circles.map(circle => (
           <Circle
             key={circle.id}
