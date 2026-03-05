@@ -1,18 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import spaceship from '../../assets/spaceship/webp/spaceship.webp'; // Importing spaceship image
-// Animated gradient background
-const gradientShift = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-`;
 
 // Main container for the hero section
 const HeroContainer = styled.section`
