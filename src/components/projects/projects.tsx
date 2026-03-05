@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FaGithub, FaGlobe, FaSearch } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaGlobe, FaSearch } from 'react-icons/fa';
 import './projects.scss';
 // @ts-ignore
 import ProjectModal from './ProjectModal.tsx';
@@ -80,6 +80,14 @@ const getFirstImageScreenshot = (screenshots: any[] = []): string | null => {
   }
 
   return null;
+};
+
+const countProjectScreenshots = (screenshots: any[] = []): number => {
+  return screenshots.reduce((count, shot) => {
+    if (typeof shot === 'string') return count + 1;
+    if (shot && typeof shot === 'object' && Array.isArray(shot.files)) return count + shot.files.length;
+    return count;
+  }, 0);
 };
 
 const Projects: React.FC = () => {
@@ -164,6 +172,10 @@ const Projects: React.FC = () => {
 
   const renderProject = (project: Project, isSmall: boolean = false) => {
     let imageSrc = project.image ? assetMap[project.image] : null;
+    const screenshotCount = countProjectScreenshots(project.screenshots);
+    const teaserText = screenshotCount > 0
+      ? `${screenshotCount} screenshots, full tech stack, and implementation notes inside.`
+      : 'Full tech stack, architecture notes, and project breakdown inside.';
 
     // Use the first available image screenshot when no explicit image is defined
     if (!imageSrc && project.screenshots && project.screenshots.length > 0) {
@@ -182,6 +194,9 @@ const Projects: React.FC = () => {
         onKeyDown={(e) => { if (e.key === 'Enter') handleProjectClick(project); }}
       >
         {imageSrc && <img className="project-background-img" src={imageSrc} alt={`${project.title} Project`} loading="lazy" />}
+        <div className="project-cta-icon" aria-hidden="true">
+          <FaExternalLinkAlt />
+        </div>
         <div className="project-content">
           <div className="project-header">
             <h3>{project.title}</h3>
@@ -192,6 +207,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
           <p className="project-description">{project.description}</p>
+          <p className="project-hover-teaser" aria-hidden="true">{teaserText}</p>
           {renderTechnologies(project.technologies, isSmall)}
           {!isSmall && (
             <div className="project-links">
@@ -226,6 +242,7 @@ const Projects: React.FC = () => {
               )}
             </div>
           )}
+          <div className="project-peek-strip" aria-hidden="true">Click to open details</div>
         </div>
       </div>
     );
