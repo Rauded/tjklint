@@ -160,14 +160,25 @@
   gap: 24px;
 }
 
+.screenshot-category-header {
+  margin-bottom: 16px;
+  margin-left: 4px;
+}
+
 .screenshot-category-title {
   font-size: 1.1em;
   color: rgba(248, 250, 252, 0.9);
-  margin-bottom: 12px;
-  margin-left: 4px;
+  margin-bottom: 6px;
   font-family: 'RobotoMono', sans-serif;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+.screenshot-category-description {
+  font-size: 0.9em;
+  color: rgba(248, 250, 252, 0.65);
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
 }
 
 .screenshots-track {

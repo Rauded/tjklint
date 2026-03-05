@@ -2,6 +2,12 @@ import React, { useEffect, useCallback } from 'react';
 import { FaGithub, FaGlobe, FaChrome, FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
 import './ProjectModal.scss';
 
+interface ScreenshotCategory {
+    category: string;
+    description: string;
+    files: string[];
+}
+
 interface ExternalLink {
     label: string;
     url: string;
@@ -26,7 +32,7 @@ interface Project {
         demo: string | null;
     };
     blogContent: string;
-    screenshots: string[] | Record<string, string[]>;
+    screenshots: string[] | ScreenshotCategory[];
     externalLinks: ExternalLink[];
 }
 
@@ -106,65 +112,67 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     </div>
 
                     {/* Screenshots Gallery */}
-                    {((Array.isArray(project.screenshots) && project.screenshots.length > 0) ||
-                        (!Array.isArray(project.screenshots) && Object.keys(project.screenshots).length > 0)) && (
-                            <div className="modal-screenshots">
-                                {Array.isArray(project.screenshots) ? (
-                                    <div className="screenshots-track">
-                                        {project.screenshots.map((filename, i) => (
-                                            <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
-                                                {isVideo(filename) ? (
-                                                    <video
-                                                        src={mediaImports[filename]}
-                                                        controls
-                                                        preload="metadata"
-                                                        playsInline
-                                                    >
-                                                        Your browser does not support the video tag.
-                                                    </video>
-                                                ) : (
-                                                    <img
-                                                        src={mediaImports[filename]}
-                                                        alt={`${project.title} screenshot ${i + 1}`}
-                                                        loading="lazy"
-                                                    />
-                                                )}
+                    {project.screenshots && project.screenshots.length > 0 && (
+                        <div className="modal-screenshots">
+                            {typeof project.screenshots[0] === 'string' ? (
+                                <div className="screenshots-track">
+                                    {(project.screenshots as string[]).map((filename, i) => (
+                                        <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
+                                            {isVideo(filename) ? (
+                                                <video
+                                                    src={mediaImports[filename]}
+                                                    controls
+                                                    preload="metadata"
+                                                    playsInline
+                                                >
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            ) : (
+                                                <img
+                                                    src={mediaImports[filename]}
+                                                    alt={`${project.title} screenshot ${i + 1}`}
+                                                    loading="lazy"
+                                                />
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="screenshots-categories">
+                                    {(project.screenshots as ScreenshotCategory[]).map((section, idx) => (
+                                        <div key={idx} className="screenshot-category">
+                                            <div className="screenshot-category-header">
+                                                <h3 className="screenshot-category-title">{section.category}</h3>
+                                                <p className="screenshot-category-description">{section.description}</p>
                                             </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="screenshots-categories">
-                                        {Object.entries(project.screenshots).map(([category, files]) => (
-                                            <div key={category} className="screenshot-category">
-                                                <h3 className="screenshot-category-title">{category}</h3>
-                                                <div className="screenshots-track categorized">
-                                                    {files.map((filename, i) => (
-                                                        <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
-                                                            {isVideo(filename) ? (
-                                                                <video
-                                                                    src={mediaImports[filename]}
-                                                                    controls
-                                                                    preload="metadata"
-                                                                    playsInline
-                                                                >
-                                                                    Your browser does not support the video tag.
-                                                                </video>
-                                                            ) : (
-                                                                <img
-                                                                    src={mediaImports[filename]}
-                                                                    alt={`${project.title} - ${category} screenshot ${i + 1}`}
-                                                                    loading="lazy"
-                                                                />
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                            <div className="screenshots-track categorized">
+                                                {section.files.map((filename, i) => (
+                                                    <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
+                                                        {isVideo(filename) ? (
+                                                            <video
+                                                                src={mediaImports[filename]}
+                                                                controls
+                                                                preload="metadata"
+                                                                playsInline
+                                                            >
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        ) : (
+                                                            <img
+                                                                src={mediaImports[filename]}
+                                                                alt={`${project.title} - ${section.category} screenshot ${i + 1}`}
+                                                                loading="lazy"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     {/* Blog Content */}
                     <div className="modal-body">
