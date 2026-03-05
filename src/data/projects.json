@@ -29,7 +29,28 @@
         "demo": null
       },
       "blogContent": "StudyExe is a focused study application I built specifically for people with ADHD — including myself. The core idea is simple: remove every possible distraction and force deep focus using science-backed techniques.\n\nThe app takes over your entire screen when a study session begins, making it impossible to switch to other apps. You upload PDF files or text-based study material, and the app locks you in with a timer.\n\nOne of the standout features is real-time eye tracking. If you look away from the screen for more than 5 seconds, a loud alert plays to bring your attention back. This acts as a digital body-doubling mechanism — it's like having someone watching over your shoulder to keep you accountable.\n\nAfter each study session, you're prompted to write down everything you remember from the material within a time limit. You can peek at the material, but this speeds up the timer and penalizes your score. Once submitted, the text is scored by AI (OpenAI API), giving you an objective measure of how much you retained.\n\nThe app also includes a rapid-fire questions module optimized for keyboard shortcuts, letting you blaze through multiple-choice questions. All wrong answers are collected for later review.\n\nOver time, StudyExe tracks your scores, study hours, and correct answers — giving you a clear picture of your progress. It's been a game-changer for my own studies and I hope it helps others too.",
-      "screenshots": [],
+      "screenshots": {
+        "Main Workflow": [
+          "obsidian_theme_dashboard.png",
+          "obsidian_theme_score.png",
+          "obsidian_theme_settings.png",
+          "obsidian_theme_study_session_configuration.png",
+          "obsidian_theme_study_session_reading.png",
+          "obsidian_theme_study_session_recall.png"
+        ],
+        "Themes": [
+          "cyberforest_theme.png",
+          "daylight_theme_screenshot.png",
+          "office_theme_dashboard.png",
+          "pinky_pie_theme_analytics.png",
+          "red_cyberpunk_theme_dashboard.png"
+        ],
+        "Website": [
+          "website_account.png",
+          "website_ascii_cta.png",
+          "website_features.png"
+        ]
+      },
       "externalLinks": [
         {
           "label": "GitHub",

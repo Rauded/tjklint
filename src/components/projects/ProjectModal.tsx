@@ -26,7 +26,7 @@ interface Project {
         demo: string | null;
     };
     blogContent: string;
-    screenshots: string[];
+    screenshots: string[] | Record<string, string[]>;
     externalLinks: ExternalLink[];
 }
 
@@ -106,32 +106,65 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     </div>
 
                     {/* Screenshots Gallery */}
-                    {project.screenshots.length > 0 && (
-                        <div className="modal-screenshots">
-                            <div className="screenshots-track">
-                                {project.screenshots.map((filename, i) => (
-                                    <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
-                                        {isVideo(filename) ? (
-                                            <video
-                                                src={mediaImports[filename]}
-                                                controls
-                                                preload="metadata"
-                                                playsInline
-                                            >
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        ) : (
-                                            <img
-                                                src={mediaImports[filename]}
-                                                alt={`${project.title} screenshot ${i + 1}`}
-                                                loading="lazy"
-                                            />
-                                        )}
+                    {((Array.isArray(project.screenshots) && project.screenshots.length > 0) ||
+                        (!Array.isArray(project.screenshots) && Object.keys(project.screenshots).length > 0)) && (
+                            <div className="modal-screenshots">
+                                {Array.isArray(project.screenshots) ? (
+                                    <div className="screenshots-track">
+                                        {project.screenshots.map((filename, i) => (
+                                            <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
+                                                {isVideo(filename) ? (
+                                                    <video
+                                                        src={mediaImports[filename]}
+                                                        controls
+                                                        preload="metadata"
+                                                        playsInline
+                                                    >
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                ) : (
+                                                    <img
+                                                        src={mediaImports[filename]}
+                                                        alt={`${project.title} screenshot ${i + 1}`}
+                                                        loading="lazy"
+                                                    />
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                ) : (
+                                    <div className="screenshots-categories">
+                                        {Object.entries(project.screenshots).map(([category, files]) => (
+                                            <div key={category} className="screenshot-category">
+                                                <h3 className="screenshot-category-title">{category}</h3>
+                                                <div className="screenshots-track categorized">
+                                                    {files.map((filename, i) => (
+                                                        <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
+                                                            {isVideo(filename) ? (
+                                                                <video
+                                                                    src={mediaImports[filename]}
+                                                                    controls
+                                                                    preload="metadata"
+                                                                    playsInline
+                                                                >
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+                                                            ) : (
+                                                                <img
+                                                                    src={mediaImports[filename]}
+                                                                    alt={`${project.title} - ${category} screenshot ${i + 1}`}
+                                                                    loading="lazy"
+                                                                />
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                    )}
+                        )}
 
                     {/* Blog Content */}
                     <div className="modal-body">

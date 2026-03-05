@@ -154,6 +154,22 @@
   padding: 16px;
 }
 
+.screenshots-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.screenshot-category-title {
+  font-size: 1.1em;
+  color: rgba(248, 250, 252, 0.9);
+  margin-bottom: 12px;
+  margin-left: 4px;
+  font-family: 'RobotoMono', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .screenshots-track {
   display: flex;
   gap: 16px;
