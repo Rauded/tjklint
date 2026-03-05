@@ -115,7 +115,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     {project.screenshots && project.screenshots.length > 0 && (
                         <div className="modal-screenshots">
                             {typeof project.screenshots[0] === 'string' ? (
-                                <div className="screenshots-track">
+                                <div className={`screenshots-track ${(project.screenshots as string[]).length === 1 ? 'single-item' : ''}`}>
                                     {(project.screenshots as string[]).map((filename, i) => (
                                         <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
                                             {isVideo(filename) ? (
@@ -145,7 +145,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                                 <h3 className="screenshot-category-title">{section.category}</h3>
                                                 <p className="screenshot-category-description">{section.description}</p>
                                             </div>
-                                            <div className="screenshots-track categorized">
+                                            <div className={`screenshots-track categorized ${section.files.length === 1 ? 'single-item' : ''}`}>
                                                 {section.files.map((filename, i) => (
                                                     <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
                                                         {isVideo(filename) ? (

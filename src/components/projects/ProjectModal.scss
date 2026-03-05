@@ -189,6 +189,10 @@
   scroll-behavior: smooth;
   padding-bottom: 8px;
 
+  &.single-item {
+    justify-content: center;
+  }
+
   &::-webkit-scrollbar {
     height: 6px;
   }

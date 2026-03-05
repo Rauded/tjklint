@@ -1,71 +1,71 @@
 {
-    "sections": [
-      {
-        "title": "Education",
-        "entries": [
-          {
-            "title": "Computer Science",
-            "company": "@Masaryk University",
-            "dates": "2023 - Expected 2026"
-          },
-          {
-            "title": "Maturita – Mathematics, Computer Science",
-            "company": "@Sobrance Gymnasium",
-            "dates": "Graduated 2023"
-          }
-        ]
-      },
-      {
-        "title": "Experience",
-        "entries": [
-          {
-            "title": "AI Developer",
-            "company": "@OneBond",
-            "website": "https://onebond.tech",
-            "dates": "2025 – Present",
-            "bulletPoints": [
-              "Designed, developed, and deployed the entire backend architecture for FairCity (AI platform for public government contract analysis) and EmaAI (business intelligence & AI-agent platform).",
-              "Architected a multi-agent AI orchestration pipeline performing autonomous public contract analysis, integrating PDF parsing, OCR, web search, web scraping, fact-checking, and summarization.",
-              "Built a custom RAG pipeline using LangChain, PostgreSQL, and VoyageAI embeddings to enable semantic search and context-based LLM reasoning.",
-              "Created asynchronous job queues to categorize millions of government contracts using embedding models in parallel, optimizing throughput and resource utilization.",
-              "Deployed FastAPI microservices on Hetzner Cloud Linux for high-performance text extraction from PDFs, reducing extraction times and handling thousands of concurrent requests.",
-              "Created an interactive node graph to visualize semantic similarity between government contracts, transforming vector data into an intuitive discovery tool."
-            ]
-          },
-          {
-            "title": "AI Developer",
-            "company": "@CZS / Masaryk University",
-            "website": "https://czs.muni.cz",
-            "dates": "2025 – Present",
-            "bulletPoints": [
-              "Built a multi-stage RAG system for university documents, combining semantic FAQ matching, vector search (OpenSearch), BM25, MMR, LLM reranking, and fallback mechanisms for low-confidence answers.",
-              "Developed FastAPI backend with asynchronous endpoints, session management, user feedback, dynamic suggestions, and conversation logging.",
-              "Engineered text chunking, re-scraping CRON jobs, contextual chunk generation, metadata filters, synthetic FAQ generation, and embedding pipelines using Voyage AI."
-            ]
-          },
-          {
-            "title": "AI Developer",
-            "company": "@iGalileo",
-            "website": "https://www.igalileo.cz/",
-            "dates": "2025",
-            "bulletPoints": [
-              "Developed an AI chatbot for Czech and Slovak municipalities using LangChain and OpenAI API.",
-              "Developed an AI agent for automatically filling out forms using internal data.",
-              "Leveraged vector-based search (PGVector) and relational databases (PostgreSQL) to support scalable knowledge management."
-            ]
-          },
-          {
-            "title": "Think Tank Member & Programmer",
-            "company": "@EDUC Alliance (European Digital University Alliance)",
-            "website": "https://www.educalliance.eu",
-            "dates": "2024 – 2025",
-            "bulletPoints": [
-              "Led a team working on a digital campus project serving over 200,000 students across 10 European universities.",
-              "Developed and fine-tuned an AI chatbot tailored to the digital campus, ensuring accurate user query responses.",
-              "Managed collaboration and communication with partner universities and state institutions regarding GDPR and AI resolutions."
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "sections": [
+    {
+      "title": "Education",
+      "entries": [
+        {
+          "title": "Computer Science",
+          "company": "@Masaryk University",
+          "dates": "2023 - Expected 2026"
+        },
+        {
+          "title": "Maturita – Mathematics, Computer Science",
+          "company": "@Sobrance Gymnasium",
+          "dates": "Graduated 2023"
+        }
+      ]
+    },
+    {
+      "title": "Experience",
+      "entries": [
+        {
+          "title": "AI Developer",
+          "company": "@OneBond",
+          "website": "https://onebond.tech",
+          "dates": "2025 – 2026",
+          "bulletPoints": [
+            "Designed, developed, and deployed the entire backend architecture for FairCity (AI platform for public government contract analysis) and helped with EmaAI (business intelligence & AI-agent platform).",
+            "Architected a multi-agent AI orchestration pipeline performing autonomous public contract analysis, integrating PDF parsing, OCR, web search, web scraping, fact-checking, and summarization.",
+            "Built a custom RAG pipeline using LangChain, PostgreSQL, and VoyageAI embeddings to enable semantic search and context-based LLM reasoning.",
+            "Created asynchronous job queues to categorize millions of government contracts using embedding models in parallel, optimizing throughput and resource utilization.",
+            "Deployed FastAPI microservices on Hetzner Cloud Linux for high-performance text extraction from PDFs, reducing extraction times and handling thousands of concurrent requests.",
+            "Created an interactive node graph to visualize semantic similarity between government contracts, transforming vector data into an intuitive discovery tool."
+          ]
+        },
+        {
+          "title": "AI Developer",
+          "company": "@CZS / Masaryk University",
+          "website": "https://czs.muni.cz",
+          "dates": "2025 – Present",
+          "bulletPoints": [
+            "Built a multi-stage RAG system for university documents, combining semantic FAQ matching, vector search (OpenSearch), BM25, MMR, LLM reranking, and fallback mechanisms for low-confidence answers.",
+            "Developed FastAPI backend with asynchronous endpoints, session management, user feedback, dynamic suggestions, and conversation logging.",
+            "Engineered text chunking, re-scraping CRON jobs, contextual chunk generation, metadata filters, synthetic FAQ generation, and embedding pipelines using Voyage AI."
+          ]
+        },
+        {
+          "title": "AI Developer",
+          "company": "@iGalileo",
+          "website": "https://www.igalileo.cz/",
+          "dates": "2025",
+          "bulletPoints": [
+            "Developed an AI chatbot for Czech and Slovak municipalities using LangChain and OpenAI API.",
+            "Developed a form-filler functionality for automatically filling out forms using AI and internal data.",
+            "Leveraged vector-based search (PGVector) and relational databases (PostgreSQL) to support scalable knowledge management."
+          ]
+        },
+        {
+          "title": "Think Tank Member & Programmer",
+          "company": "@EDUC Alliance (European Digital University Alliance)",
+          "website": "https://www.educalliance.eu",
+          "dates": "2024 – 2025",
+          "bulletPoints": [
+            "Led a team working on a digital campus project serving over 200,000 students across 10 European universities.",
+            "Developed and fine-tuned an AI chatbot tailored to the digital campus, ensuring accurate user query responses.",
+            "Managed collaboration and communication with partner universities and state institutions regarding GDPR and AI resolutions."
+          ]
+        }
+      ]
+    }
+  ]
+}
