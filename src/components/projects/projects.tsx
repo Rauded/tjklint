@@ -39,6 +39,22 @@ interface Project {
 // Asset mapping for project images
 const assetMap: { [key: string]: string } = {};
 
+// Import all media dynamically for backgrounds
+const mediaImports: { [key: string]: string } = {};
+const importAll = (r: any) => {
+  r.keys().forEach((key: string) => {
+    const filename = key.replace('./', '');
+    mediaImports[filename] = r(key);
+  });
+};
+
+try {
+  // @ts-ignore
+  importAll(require.context('../../assets/projects', false, /\.(png|jpe?g|gif|webp|mp4|webm|mov)$/));
+} catch (e) {
+  // Assets directory may not exist yet
+}
+
 // Handle the "Coming Soon" click event
 const handleComingSoonClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
   event.preventDefault();
@@ -126,7 +142,34 @@ const Projects: React.FC = () => {
   };
 
   const renderProject = (project: Project, isSmall: boolean = false) => {
-    const imageSrc = project.image ? assetMap[project.image] : null;
+    let imageSrc = project.image ? assetMap[project.image] : null;
+
+    // Use first screenshot if no explicit image is defined
+    if (!imageSrc && project.screenshots && project.screenshots.length > 0) {
+      const firstScreenshot = project.screenshots[0];
+      let filename = '';
+      if (typeof firstScreenshot === 'string') {
+        filename = firstScreenshot;
+      } else if (typeof firstScreenshot === 'object' && firstScreenshot !== null) {
+        // @ts-ignore
+        if (firstScreenshot.files && firstScreenshot.files.length > 0) {
+          // @ts-ignore
+          filename = firstScreenshot.files[0];
+        }
+      }
+
+      // Avoid video backgrounds for simplicity, use only images if possible
+      if (filename && mediaImports[filename] && !/\.(mp4|webm|mov)$/i.test(filename)) {
+        imageSrc = mediaImports[filename];
+      } else if (filename && /\.(mp4|webm|mov)$/i.test(filename) && project.screenshots.length > 1) {
+        // try the second item if first is a video
+        const second = project.screenshots[1];
+        if (typeof second === 'string' && mediaImports[second] && !/\.(mp4|webm|mov)$/i.test(second)) {
+          imageSrc = mediaImports[second];
+        }
+      }
+    }
+
     const containerClass = isSmall ? 'small-project' : 'project-container';
 
     return (
@@ -138,7 +181,7 @@ const Projects: React.FC = () => {
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter') handleProjectClick(project); }}
       >
-        {imageSrc && <img src={imageSrc} alt={`${project.title} Project`} />}
+        {imageSrc && <img className="project-background-img" src={imageSrc} alt={`${project.title} Project`} />}
         <div className="project-content">
           <div className="project-header">
             <h3>{project.title}</h3>

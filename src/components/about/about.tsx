@@ -1,5 +1,6 @@
 import React from "react";
 import "./about.scss";
+import myPhoto from "../../assets/about/picture_of_me.jpeg";
 
 const About: React.FC = () => {
 
@@ -10,22 +11,17 @@ const About: React.FC = () => {
           <h2 className="about-title">About Me</h2>
           <p>
             Hello! My name is <span className="purple-text">Eduard Hvižďák</span>.
-            I’m an AI developer from Slovakia, currently based in Brno, Czechia,
+            I’m an AI developer / programmer from Slovakia, currently based in Brno, Czechia,
             where I’m studying{" "}
             <span className="purple-text">Computer Science at Masaryk University</span>.
           </p>
           <p>
-            I work as an{" "}
-            <span className="purple-text">AI Developer at OneBond</span>, building
-            full backend architectures and AI systems for platforms like FairCity
-            (government contract analysis) and EmaAI (business intelligence).
-            In parallel, I develop AI solutions for{" "}
-            <span className="purple-text">CZS / Masaryk University</span> — most
-            notably a multi-stage RAG chatbot helping students with Erasmus
+            Currently I am working part-time for <span className="purple-text">Centre for International Cooperation Masaryk University</span>
+            . Where I am developing a chatbot for helping students with international
             exchange questions.
           </p>
           <p>
-            My focus is on{" "}
+            My work is focused on{" "}
             <span className="purple-text">
               LangChain, RAG pipelines, multi-agent orchestration, and FastAPI backends
             </span>
@@ -68,9 +64,7 @@ const About: React.FC = () => {
           </p>
         </div>
         <div className="about-photo">
-          <div className="photo-placeholder">
-            <span>Photo coming soon</span>
-          </div>
+          <img src={myPhoto} alt="Eduard Hvižďák" className="profile-photo" />
         </div>
       </section>
     </div>

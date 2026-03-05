@@ -26,7 +26,7 @@
       ],
       "links": {
         "github": "https://github.com/Rauded",
-        "demo": null
+        "demo": "https://www.studyexe.com"
       },
       "blogContent": "StudyExe is a focused study application I built specifically for people with ADHD — including myself. The core idea is simple: remove every possible distraction and force deep focus using science-backed techniques.\n\nThe app takes over your entire screen when a study session begins, making it impossible to switch to other apps. You upload PDF files or text-based study material, and the app locks you in with a timer.\n\nOne of the standout features is real-time eye tracking. If you look away from the screen for more than 5 seconds, a loud alert plays to bring your attention back. This acts as a digital body-doubling mechanism — it's like having someone watching over your shoulder to keep you accountable.\n\nAfter each study session, you're prompted to write down everything you remember from the material within a time limit. You can peek at the material, but this speeds up the timer and penalizes your score. Once submitted, the text is scored by AI (OpenAI API), giving you an objective measure of how much you retained.\n\nThe app also includes a rapid-fire questions module optimized for keyboard shortcuts, letting you blaze through multiple-choice questions. All wrong answers are collected for later review.\n\nOver time, StudyExe tracks your scores, study hours, and correct answers — giving you a clear picture of your progress. It's been a game-changer for my own studies and I hope it helps others too.",
       "screenshots": [
@@ -35,11 +35,11 @@
           "description": "The core study session experience, utilizing an Obsidian-inspired theme. This workflow guides users through setting up a session, actively reading materials while being monitored, and finally completing a timed recall test to assess retention.",
           "files": [
             "obsidian_theme_dashboard.png",
-            "obsidian_theme_settings.png",
             "obsidian_theme_study_session_configuration.png",
             "obsidian_theme_study_session_reading.png",
             "obsidian_theme_study_session_recall.png",
-            "obsidian_theme_score.png"
+            "obsidian_theme_score.png",
+            "obsidian_theme_settings.png"
           ]
         },
         {
@@ -193,6 +193,48 @@
           "label": "GitHub",
           "url": "https://github.com/Rauded/college_extension_chrome",
           "icon": "github"
+        }
+      ]
+    },
+    {
+      "id": "instaluj-openclaw",
+      "title": "NasaďClaw",
+      "description": "Professional deployment and management of OpenClaw, an open-source AI assistant for leaders and teams. Localized for Czech & Slovak markets.",
+      "image": null,
+      "featured": true,
+      "category": "small",
+      "technologies": {
+        "languages": [
+          "TypeScript"
+        ],
+        "frameworks": [
+          "Next.js",
+          "Tailwind CSS"
+        ],
+        "libraries": [
+          "Stripe",
+          "PostHog"
+        ]
+      },
+      "tags": [
+        "SaaS",
+        "AI",
+        "B2B",
+        "Web App"
+      ],
+      "links": {
+        "github": "https://github.com/Rauded",
+        "demo": "https://www.nasadclaw.cz"
+      },
+      "blogContent": "NasaďClaw (formerly InstalujOpenClaw) is a premium B2B service focused on deploying and maintaining the OpenClaw AI assistant for executives and teams in the Czech and Slovak markets.\n\nOpenClaw is an open-source, fully local AI that connects to over 50 services. However, setting it up securely and integrating it efficiently requires significant technical effort. That's where NasaďClaw comes in: we provide a 'Collison Install' service where we personally deploy the AI on a dedicated Mac Mini directly at the client's office.\n\nThe service ensures that strict InfoSec requirements are met, credentials are appropriately managed, and the system is rigorously hardened. By handling all complex deployments, security patches, and ongoing maintenance, teams get immediate leverage from day one instead of dealing with another software project to maintain.\n\nThe website itself was built using Next.js and Tailwind CSS, featuring a complete billing process through Stripe, and product analytics using PostHog. The design prioritizes speed, security, and a premium professional aesthetic to build trust with local enterprise clients.",
+      "screenshots": [
+        "nasadclaw-real-image.png"
+      ],
+      "externalLinks": [
+        {
+          "label": "Website",
+          "url": "https://www.nasadclaw.cz",
+          "icon": "demo"
         }
       ]
     }
