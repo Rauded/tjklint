@@ -89,46 +89,57 @@ const RightContainer = styled.div`
 // First half: roam forward (scaleY 1), second half: roam back flipped (scaleY -1)
 const roamAnimation = keyframes`
   0% {
-    transform: translate(0px, 0px) scaleY(1);
+    transform: translate(0px, 0px);
   }
   15% {
-    transform: translate(25px, -35px) scaleY(1);
+    transform: translate(25px, -35px);
   }
   30% {
-    transform: translate(-10px, -25px) scaleY(1);
+    transform: translate(-10px, -25px);
   }
   45% {
-    transform: translate(-30px, 15px) scaleY(1);
+    transform: translate(-30px, 15px);
   }
-  /* instant vertical flip at the direction reversal */
+  /* removed automatic flipping at 50% */
   50% {
-    transform: translate(-30px, 15px) scaleY(-1);
+    transform: translate(-30px, 15px);
   }
   65% {
-    transform: translate(10px, 30px) scaleY(-1);
+    transform: translate(10px, 30px);
   }
   80% {
-    transform: translate(30px, -10px) scaleY(-1);
+    transform: translate(30px, -10px);
   }
   95% {
-    transform: translate(5px, -5px) scaleY(-1);
+    transform: translate(5px, -5px);
   }
-  /* flip back before looping */
   100% {
-    transform: translate(0px, 0px) scaleY(1);
+    transform: translate(0px, 0px);
   }
 `;
 
 // Styling for the spaceship image with roaming + flip animation
-const Spaceship = styled.img`
+const SpaceshipContainer = styled.div<{ isMirrored: boolean }>`
   width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
-  animation: ${roamAnimation} 8s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
+  transition: transform 0.6s ease-in-out;
+  transform: scaleX(${props => props.isMirrored ? -1 : 1});
 
   @media (min-width: 768px) {
     width: 65%;
   }
+`;
+
+// Styling for the spaceship image with roaming animation (color filters applied via hueRotate)
+const Spaceship = styled.img<{ hueRotate: number }>`
+  width: 100%;
+  animation: ${roamAnimation} 8s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px hsla(${props => (props.hueRotate + 120) % 360}, 70%, 50%, 0.3)) 
+          hue-rotate(${props => props.hueRotate}deg);
+  transition: filter 1s ease-in-out;
 `;
 
 // Animation for shrinking and moving circles
@@ -234,9 +245,8 @@ const typewriterTexts = [
   "CS Student @ Masaryk University",
   "Python & LangChain Developer",
   "Building AI agents & RAG pipelines",
-  "Coffee Drinker",
   "Hackathon Fanatic",
-  "Multilingvální nadšenec"
+  "AI Enthusiast"
 ]; // Array of texts for the typewriter effect
 
 // Main Hero component
@@ -244,6 +254,8 @@ const Hero: React.FC = () => {
   const [circles, setCircles] = useState<CircleProps[]>([]); // State to manage circles
   const [topLine, setTopLine] = useState(''); // State for random headline
   const [currentText, setCurrentText] = useState(''); // State for typewriter text
+  const [hueRotate, setHueRotate] = useState(0); // State for simulated GIF color (0-360)
+  const [isMirrored, setIsMirrored] = useState(false); // State for manual mirroring
   const rightContainerRef = useRef<HTMLDivElement>(null); // Ref to get the right container's dimensions
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -334,6 +346,21 @@ const Hero: React.FC = () => {
     return () => clearInterval(interval); // Clean up interval on component unmount
   }, []);
 
+  useEffect(() => {
+    // Frequently switch colors (every 2.5 seconds) and occasionally mirror
+    const transitionInterval = setInterval(() => {
+      // Rotate through 8 distinct color steps (0, 45, 90, 135, 180, 225, 270, 315)
+      setHueRotate(prev => (prev + 45) % 360);
+
+      // 15% chance to toggle mirroring during any color transition
+      if (Math.random() < 0.15) {
+        setIsMirrored(prev => !prev);
+      }
+    }, 2500);
+
+    return () => clearInterval(transitionInterval);
+  }, []);
+
   return (
     <HeroContainer>
       <LeftContainer>
@@ -342,7 +369,13 @@ const Hero: React.FC = () => {
         <TypewriterText>{currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
-        <Spaceship src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`} alt="ASCII art" />
+        <SpaceshipContainer isMirrored={isMirrored}>
+          <Spaceship
+            src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`}
+            alt="ASCII art"
+            hueRotate={hueRotate}
+          />
+        </SpaceshipContainer>
         {circles.map(circle => (
           <Circle
             key={circle.id}
