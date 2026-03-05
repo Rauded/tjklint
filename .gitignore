@@ -23,5 +23,5 @@ pnpm-debug.log*
 
 # src/assets and public assets should NOT be ignored
 !/public/*.gif
-!/public/*.png
+*.png
 !/src/assets/**/*
