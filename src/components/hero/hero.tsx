@@ -88,22 +88,31 @@ const RightContainer = styled.div`
 
 // First half: roam forward (scaleY 1), second half: roam back flipped (scaleY -1)
 // TARS patrols back and forth on a flat plane.
+// TARS patrols back and forth starting from the center
 const patrolAnimation = keyframes`
-  /* 1. Start on the far right, facing left */
-  0% { transform: translateX(35%) scaleX(-1); }
-  5% { transform: translateX(35%) scaleX(-1); } /* Brief pause */
+  /* 1. Start at center, facing left */
+  0% { transform: translateX(0%) scaleX(-1); }
+  2.5% { transform: translateX(0%) scaleX(-1); }
 
-  /* 2. Walk strictly horizontally to the left */
-  45% { transform: translateX(-35%) scaleX(-1); }
-  50% { transform: translateX(-35%) scaleX(-1); } /* Pause at the left edge */
+  /* 2. Walk to the left edge */
+  22.5% { transform: translateX(-35%) scaleX(-1); }
+  27.5% { transform: translateX(-35%) scaleX(-1); } /* Pause */
 
   /* 3. Pivot instantly to face right */
-  50.1% { transform: translateX(-35%) scaleX(1); }
-  55% { transform: translateX(-35%) scaleX(1); } /* Brief pause after turning */
+  27.6% { transform: translateX(-35%) scaleX(1); }
+  32.5% { transform: translateX(-35%) scaleX(1); }
 
-  /* 4. Walk back to the right */
-  95% { transform: translateX(35%) scaleX(1); }
-  100% { transform: translateX(35%) scaleX(-1); } /* Pivot to loop back to 0% */
+  /* 4. Walk to the right edge */
+  72.5% { transform: translateX(35%) scaleX(1); }
+  77.5% { transform: translateX(35%) scaleX(1); } /* Pause */
+
+  /* 5. Pivot instantly to face left */
+  77.6% { transform: translateX(35%) scaleX(-1); }
+  82.5% { transform: translateX(35%) scaleX(-1); }
+
+  /* 6. Walk back to center */
+  97.5% { transform: translateX(0%) scaleX(-1); }
+  100% { transform: translateX(0%) scaleX(-1); }
 `;
 
 const TarsContainer = styled.div`
@@ -112,17 +121,18 @@ const TarsContainer = styled.div`
   justify-content: center;
   align-items: flex-end; /* Ground TARS to the bottom of his container */
   z-index: 1;
+  position: relative; /* Ensure particles spawn relative to TARS */
+  /* Move animation to container so children (TARS + Particles) follow the path */
+  animation: ${patrolAnimation} 24s linear infinite; 
 
   @media (min-width: 768px) {
     width: 65%;
   }
 `;
 
-// Styling for the spaceship image with roaming animation (static green theme)
+// Styling for TARS (animation moved to container)
 const TarsRender = styled.img`
   width: 100%;
-  /* linear easing is CRITICAL. Ease-in-out makes walking animations look like they are sliding */
-  animation: ${patrolAnimation} 24s linear infinite; 
   filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
 `;
 
@@ -341,17 +351,17 @@ const Hero: React.FC = () => {
             src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`}
             alt="TARS walking ASCII art"
           />
+          {circles.map(circle => (
+            <Circle
+              key={circle.id}
+              left={circle.left}
+              top={circle.top}
+              size={circle.size}
+              containerWidth={circle.containerWidth}
+              containerHeight={circle.containerHeight}
+            />
+          ))}
         </TarsContainer>
-        {circles.map(circle => (
-          <Circle
-            key={circle.id}
-            left={circle.left}
-            top={circle.top}
-            size={circle.size}
-            containerWidth={circle.containerWidth}
-            containerHeight={circle.containerHeight}
-          />
-        ))}
       </RightContainer>
     </HeroContainer>
   );
