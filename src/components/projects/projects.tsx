@@ -32,7 +32,7 @@ interface Project {
     demo: string | null;
   };
   blogContent: string;
-  screenshots: string[];
+  screenshots: any[];
   externalLinks: ExternalLink[];
 }
 
@@ -59,6 +59,27 @@ try {
 const handleComingSoonClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
   event.preventDefault();
   alert('Coming soon!');
+};
+
+const isVideoFile = (filename: string) => /\.(mp4|webm|mov)$/i.test(filename);
+
+const getFirstImageScreenshot = (screenshots: any[] = []): string | null => {
+  for (const shot of screenshots) {
+    if (typeof shot === 'string') {
+      if (!isVideoFile(shot) && mediaImports[shot]) return mediaImports[shot];
+      continue;
+    }
+
+    if (shot && typeof shot === 'object' && Array.isArray(shot.files)) {
+      for (const filename of shot.files) {
+        if (typeof filename === 'string' && !isVideoFile(filename) && mediaImports[filename]) {
+          return mediaImports[filename];
+        }
+      }
+    }
+  }
+
+  return null;
 };
 
 const Projects: React.FC = () => {
@@ -144,30 +165,9 @@ const Projects: React.FC = () => {
   const renderProject = (project: Project, isSmall: boolean = false) => {
     let imageSrc = project.image ? assetMap[project.image] : null;
 
-    // Use first screenshot if no explicit image is defined
+    // Use the first available image screenshot when no explicit image is defined
     if (!imageSrc && project.screenshots && project.screenshots.length > 0) {
-      const firstScreenshot = project.screenshots[0];
-      let filename = '';
-      if (typeof firstScreenshot === 'string') {
-        filename = firstScreenshot;
-      } else if (typeof firstScreenshot === 'object' && firstScreenshot !== null) {
-        // @ts-ignore
-        if (firstScreenshot.files && firstScreenshot.files.length > 0) {
-          // @ts-ignore
-          filename = firstScreenshot.files[0];
-        }
-      }
-
-      // Avoid video backgrounds for simplicity, use only images if possible
-      if (filename && mediaImports[filename] && !/\.(mp4|webm|mov)$/i.test(filename)) {
-        imageSrc = mediaImports[filename];
-      } else if (filename && /\.(mp4|webm|mov)$/i.test(filename) && project.screenshots.length > 1) {
-        // try the second item if first is a video
-        const second = project.screenshots[1];
-        if (typeof second === 'string' && mediaImports[second] && !/\.(mp4|webm|mov)$/i.test(second)) {
-          imageSrc = mediaImports[second];
-        }
-      }
+      imageSrc = getFirstImageScreenshot(project.screenshots);
     }
 
     const containerClass = isSmall ? 'small-project' : 'project-container';
