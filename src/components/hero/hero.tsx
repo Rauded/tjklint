@@ -184,6 +184,7 @@ const TarsContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
   animation: ${patrolAnimation} 24s linear infinite;
+  will-change: transform;
 `;
 
 const TarsImage = styled.img`
